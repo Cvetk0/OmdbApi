@@ -17,7 +17,7 @@ Author: Jernej Kladnik - cvetk0 at gmail.com
 
 import requests
 
-from OmdbApi.entities import Movie
+from OmdbApi.entities import Movie, Episode
 
 
 class Client():
@@ -52,7 +52,7 @@ class Client():
         :type movie_title_list: list
         :param movie_title_list: movie title
         :return: list of movies
-        :rtype: list
+        :rtype: list[Movie]
         """
         if isinstance(movie_title_list, list):
             titles = movie_title_list
@@ -182,7 +182,8 @@ class Client():
         if 'Error' in e:
             print 'Error retrieving series: %r season: %s episode: %s' % (title, str(season), str(episode))
         else:
-            episode_data = (e, e['Poster'])
+            #episode_data = (e, e['Poster'])
+            episode_data = Episode(e)
 
         return episode_data
 
